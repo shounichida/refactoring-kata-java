@@ -83,6 +83,12 @@ public class ShoppingController {
             }
         }
 
+        checkPriceLimitAndThrowAnExceptionIfReached(b, p);
+
+        return String.valueOf(p);
+    }
+
+    private void checkPriceLimitAndThrowAnExceptionIfReached(Body b, double p) {
         try {
             if (b.getType().equals("STANDARD_CUSTOMER")) {
                 if (p > 200) {
@@ -104,8 +110,6 @@ public class ShoppingController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-
-        return String.valueOf(p);
     }
 
     private double computeDiscountForCustomer(Body b) {
