@@ -33,14 +33,10 @@ public class ShoppingController {
         // Compute total amount depending on the types and quantity of product and
         // if we are in winter or summer discounts periods
         if (
-            !(
+            isBetweenTheDay5AndTheDay15allExcluded(cal) &&
+                cal.get(Calendar.MONTH) == Calendar.JUNE ||
                 isBetweenTheDay5AndTheDay15allExcluded(cal) &&
-                    cal.get(Calendar.MONTH) == Calendar.JUNE
-            ) &&
-            !(
-                isBetweenTheDay5AndTheDay15allExcluded(cal) &&
-                cal.get(Calendar.MONTH) == Calendar.JANUARY
-            )
+                    cal.get(Calendar.MONTH) == Calendar.JANUARY
         ) {
             if (b.getItems() == null) {
                 return "0";
@@ -52,9 +48,9 @@ public class ShoppingController {
                 if (it.getType().equals("TSHIRT")) {
                     price += 30 * it.getNb() * discount;
                 } else if (it.getType().equals("DRESS")) {
-                    price += 50 * it.getNb() * discount;
+                    price += 50 * it.getNb() * 0.8 * discount;
                 } else if (it.getType().equals("JACKET")) {
-                    price += 100 * it.getNb() * discount;
+                    price += 100 * it.getNb() * 0.9 * discount;
                 }
                 // else if (it.getType().equals("SWEATSHIRT")) {
                 //     price += 80 * it.getNb();
@@ -71,9 +67,9 @@ public class ShoppingController {
                 if (it.getType().equals("TSHIRT")) {
                     price += 30 * it.getNb() * discount;
                 } else if (it.getType().equals("DRESS")) {
-                    price += 50 * it.getNb() * 0.8 * discount;
+                    price += 50 * it.getNb() * discount;
                 } else if (it.getType().equals("JACKET")) {
-                    price += 100 * it.getNb() * 0.9 * discount;
+                    price += 100 * it.getNb() * discount;
                 }
                 // else if (it.getType().equals("SWEATSHIRT")) {
                 //     price += 80 * it.getNb();
