@@ -28,15 +28,7 @@ public class ShoppingController {
         cal.setTime(date);
 
         // Compute discount for customer
-        if (b.getType().equals("STANDARD_CUSTOMER")) {
-            d = 1;
-        } else if (b.getType().equals("PREMIUM_CUSTOMER")) {
-            d = 0.9;
-        } else if (b.getType().equals("PLATINUM_CUSTOMER")) {
-            d = 0.5;
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+        d = computeDiscountForCustomer(b);
 
         // Compute total amount depending on the types and quantity of product and
         // if we are in winter or summer discounts periods
@@ -114,6 +106,20 @@ public class ShoppingController {
         }
 
         return String.valueOf(p);
+    }
+
+    private double computeDiscountForCustomer(Body b) {
+        double d;
+        if (b.getType().equals("STANDARD_CUSTOMER")) {
+            d = 1;
+        } else if (b.getType().equals("PREMIUM_CUSTOMER")) {
+            d = 0.9;
+        } else if (b.getType().equals("PLATINUM_CUSTOMER")) {
+            d = 0.5;
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        return d;
     }
 }
 
