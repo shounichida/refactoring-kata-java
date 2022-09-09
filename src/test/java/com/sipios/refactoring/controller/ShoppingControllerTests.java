@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ShoppingControllerTests extends UnitTest {
 
     @InjectMocks
@@ -14,6 +16,39 @@ class ShoppingControllerTests extends UnitTest {
     void should_not_throw() {
         Assertions.assertDoesNotThrow(
             () -> controller.getPrice(new Body(new Item[] {}, "STANDARD_CUSTOMER"))
+        );
+    }
+
+    @Test
+    void whenStandardCustomerReturn0() {
+        final String price = controller.getPrice(new Body(new Item[]{}, "STANDARD_CUSTOMER"));
+        System.out.println("--->>>"+price);
+
+
+      assertEquals("0.0",
+            controller.getPrice(new Body(new Item[] {}, "STANDARD_CUSTOMER"))
+        );
+    }
+
+    @Test
+    void whenPremiumCustomerReturn0() {
+        final String price = controller.getPrice(new Body(new Item[]{}, "PREMIUM_CUSTOMER"));
+        System.out.println("--->>>"+price);
+
+
+        assertEquals("0.0",
+            controller.getPrice(new Body(new Item[] {}, "PREMIUM_CUSTOMER"))
+        );
+    }
+
+    @Test
+    void whenPlatiniumCustomerReturn0() {
+        final String price = controller.getPrice(new Body(new Item[]{}, "PLATINUM_CUSTOMER"));
+        System.out.println("--->>>"+price);
+
+
+        assertEquals("0.0",
+            controller.getPrice(new Body(new Item[] {}, "PLATINUM_CUSTOMER"))
         );
     }
 }
