@@ -20,13 +20,14 @@ class ShoppingControllerTests extends UnitTest {
     }
 
     @Test
-    void whenStandardCustomerReturn0() {
-        final String price = controller.getPrice(new Body(new Item[]{}, "STANDARD_CUSTOMER"));
+    void whenStandardCustomerWithTShirtReturn30() {
+        final Item[] items = {new Item("TSHIRT",1)};
+        final String price = controller.getPrice(new Body(items, "STANDARD_CUSTOMER"));
         System.out.println("--->>>"+price);
 
 
-      assertEquals("0.0",
-            controller.getPrice(new Body(new Item[] {}, "STANDARD_CUSTOMER"))
+      assertEquals("30.0",
+            controller.getPrice(new Body(items, "STANDARD_CUSTOMER"))
         );
     }
 
