@@ -16,8 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/shopping")
 public class ShoppingController {
 
-    private Logger logger = LoggerFactory.getLogger(ShoppingController.class);
-
     @PostMapping
     public String getPrice(@RequestBody Body b) {
         double price = 0;
@@ -52,9 +50,6 @@ public class ShoppingController {
                 } else if (it.getType().equals("JACKET")) {
                     price += 100 * it.getNb() * 0.9 * discount;
                 }
-                // else if (it.getType().equals("SWEATSHIRT")) {
-                //     price += 80 * it.getNb();
-                // }
             }
         } else {
             if (b.getItems() == null) {
@@ -71,9 +66,6 @@ public class ShoppingController {
                 } else if (it.getType().equals("JACKET")) {
                     price += 100 * it.getNb() * discount;
                 }
-                // else if (it.getType().equals("SWEATSHIRT")) {
-                //     price += 80 * it.getNb();
-                // }
             }
         }
 
