@@ -36,12 +36,12 @@ public class ShoppingController {
             !(
                 cal.get(Calendar.DAY_OF_MONTH) < 15 &&
                 cal.get(Calendar.DAY_OF_MONTH) > 5 &&
-                cal.get(Calendar.MONTH) == 5
+                cal.get(Calendar.MONTH) == Calendar.JUNE
             ) &&
             !(
                 cal.get(Calendar.DAY_OF_MONTH) < 15 &&
                 cal.get(Calendar.DAY_OF_MONTH) > 5 &&
-                cal.get(Calendar.MONTH) == 0
+                cal.get(Calendar.MONTH) == Calendar.JANUARY
             )
         ) {
             if (b.getItems() == null) {
