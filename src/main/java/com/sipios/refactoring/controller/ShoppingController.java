@@ -34,13 +34,11 @@ public class ShoppingController {
         // if we are in winter or summer discounts periods
         if (
             !(
-                cal.get(Calendar.DAY_OF_MONTH) < 15 &&
-                cal.get(Calendar.DAY_OF_MONTH) > 5 &&
-                cal.get(Calendar.MONTH) == Calendar.JUNE
+                isBetweenTheDay5AndTheDay15allExcluded(cal) &&
+                    cal.get(Calendar.MONTH) == Calendar.JUNE
             ) &&
             !(
-                cal.get(Calendar.DAY_OF_MONTH) < 15 &&
-                cal.get(Calendar.DAY_OF_MONTH) > 5 &&
+                isBetweenTheDay5AndTheDay15allExcluded(cal) &&
                 cal.get(Calendar.MONTH) == Calendar.JANUARY
             )
         ) {
@@ -86,6 +84,11 @@ public class ShoppingController {
         checkPriceLimitAndThrowAnExceptionIfReached(b, price);
 
         return String.valueOf(price);
+    }
+
+    private boolean isBetweenTheDay5AndTheDay15allExcluded(Calendar cal) {
+        return cal.get(Calendar.DAY_OF_MONTH) < 15 &&
+            cal.get(Calendar.DAY_OF_MONTH) > 5;
     }
 
     private void checkPriceLimitAndThrowAnExceptionIfReached(Body b, double p) {
