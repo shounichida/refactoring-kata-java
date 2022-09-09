@@ -20,15 +20,15 @@ public class ShoppingController {
 
     @PostMapping
     public String getPrice(@RequestBody Body b) {
-        double p = 0;
-        double d;
+        double price = 0;
+        double discount;
 
         Date date = new Date();
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
         cal.setTime(date);
 
         // Compute discount for customer
-        d = computeDiscountForCustomer(b);
+        discount = computeDiscountForCustomer(b);
 
         // Compute total amount depending on the types and quantity of product and
         // if we are in winter or summer discounts periods
@@ -52,11 +52,11 @@ public class ShoppingController {
                 Item it = b.getItems()[i];
 
                 if (it.getType().equals("TSHIRT")) {
-                    p += 30 * it.getNb() * d;
+                    price += 30 * it.getNb() * discount;
                 } else if (it.getType().equals("DRESS")) {
-                    p += 50 * it.getNb() * d;
+                    price += 50 * it.getNb() * discount;
                 } else if (it.getType().equals("JACKET")) {
-                    p += 100 * it.getNb() * d;
+                    price += 100 * it.getNb() * discount;
                 }
                 // else if (it.getType().equals("SWEATSHIRT")) {
                 //     price += 80 * it.getNb();
@@ -71,11 +71,11 @@ public class ShoppingController {
                 Item it = b.getItems()[i];
 
                 if (it.getType().equals("TSHIRT")) {
-                    p += 30 * it.getNb() * d;
+                    price += 30 * it.getNb() * discount;
                 } else if (it.getType().equals("DRESS")) {
-                    p += 50 * it.getNb() * 0.8 * d;
+                    price += 50 * it.getNb() * 0.8 * discount;
                 } else if (it.getType().equals("JACKET")) {
-                    p += 100 * it.getNb() * 0.9 * d;
+                    price += 100 * it.getNb() * 0.9 * discount;
                 }
                 // else if (it.getType().equals("SWEATSHIRT")) {
                 //     price += 80 * it.getNb();
@@ -83,9 +83,9 @@ public class ShoppingController {
             }
         }
 
-        checkPriceLimitAndThrowAnExceptionIfReached(b, p);
+        checkPriceLimitAndThrowAnExceptionIfReached(b, price);
 
-        return String.valueOf(p);
+        return String.valueOf(price);
     }
 
     private void checkPriceLimitAndThrowAnExceptionIfReached(Body b, double p) {
